@@ -1,0 +1,17 @@
+<h2>Direct Package Manipulation</h2>
+
+<p>
+	When all options for gracefully removing packages have been tried,
+	there is a <a href="http://debian-handbook.info/browse/stable/sect.manipulating-packages-with-dpkg.html">
+	fix</a>.  You can <code>sudo vi /var/lib/dpkg/status</code> with
+	<em>extreme care</em>, ideally having backed up the file, and edit
+	or remove the package status directly.
+</p>	
+
+<p>
+	Ideally you should <code class="rootcode">
+		cp /var/lib/dpkg/status /tmp/status.bak</code>
+	and <code class="rootcode">
+		dpkg --get-selections &gt; /tmp/selections.bak</code>
+</p>
+

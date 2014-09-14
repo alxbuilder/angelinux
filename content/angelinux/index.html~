@@ -1,0 +1,189 @@
+<h2>Getting Angelinux</h2>
+<br />
+
+<h3>Schema</h3>
+<p>
+	From now on, we should get used to seeing <em>things</em> on the
+	web being represented with metadata from <a href="http://schema.org/">
+	schema.org</a>.  My linux distribution is one such
+	<a href="http://schema-creator.org/product.php">product</a>.
+</p>
+
+<div class="schema" itemscope itemtype="http://schema.org/Product">
+	<a itemprop="url" href="https://spideroak.com/share/MFXGOZLMNFXHK6A/angelinux/media/d21c60a3-8b35-494d-918a-d1f4f72fa01e/release.alx/angelinux0.38.img">
+		<div itemprop="name"><strong>angelinux</strong></div>
+	</a>
+	<div itemprop="description">A GNU/Linux distribution
+		built from Source Code based on Linux from Scratch
+	</div>
+	<div itemprop="brand" itemscope itemtype="http://schema.org/Organization">
+		<span itemprop="name">angelinux
+		</span>
+	</div>
+	<div itemprop="manufacturer"
+			itemscope itemtype="http://schema.org/Organization">
+		Manufactured by:
+			<span itemprop="name">Mel McWeeney
+		</span>
+	</div>
+	<div>Model:
+		<span itemprop="model">0.38
+		</span>
+	</div>
+	<div itemprop="aggregateRating"
+			itemscope itemtype="http://schema.org/AggregateRating">
+		<span itemprop="ratingValue">10
+		</span> based on
+		<span itemprop="reviewCount">1
+		</span> reviews
+	</div>
+	<div itemprop="offers" 
+		itemscope itemtype="http://schema.org/Offer">
+		<span itemprop="price">0
+		</span>
+		<link itemprop="itemCondition" href="http://schema.org/NewCondition" /> New
+	</div>
+</div>
+
+
+<p>Angelinux is my own build of <a href="http://www.linuxfromscratch.org/"
+title="Linux from Scratch">Linux from Scratch</a>.
+You can <a href="https://spideroak.com/share/MFXGOZLMNFXHK6A/angelinux/media/d21c60a3-8b35-494d-918a-d1f4f72fa01e/release.alx/angelinux0.38.img" title="download">download</a> it, and check it's
+<a href="https://spideroak.com/share/MFXGOZLMNFXHK6A/angelinux/media/d21c60a3-8b35-494d-918a-d1f4f72fa01e/release.alx/angelinux0.38.md5"
+title="md5sum">md5sum</a>
+from <a href="http:///spideroak.com/" title="SpiderOak">SpiderOak</a>.  For the
+record, that's no small achievement, to build your own operating system, and not
+one I've so far had the time to repeat.  Anyway the current version is 0.38.
+The image can be written to and SD card or USB stick (1GB is enough).
+Here's how...
+</p>
+
+<h3>Step 1 - Partitions as we begin</h3>
+
+<p>
+	Before inserting your media (USB stick or SD Card), open a linux terminal.
+	We want to know what device name will be given to the device by the 
+	<em>udev</em> device management system.  This command lets you to find out:
+</p>
+
+<code class="usercode">cat /proc/partitions</code>
+
+<p>Here's what you might see...</p>
+
+<pre>
+<p class="output">
+major minor  #blocks  name
+
+   8        0  976762584 sda
+   8        1     248832 sda1
+   8        2    5999616 sda2
+   8        3    3999744 sda3
+   8        4          1 sda4
+   8        5   31998976 sda5
+  11        0    1048575 sr0
+   8       16    7816704 sdb
+   8       17    7816688 sdb1
+</p>
+</pre>
+<br />
+
+<h3>Step 2 - Partitions including our media</h3>
+
+<p>
+	Now plug in the device and repeat the above command.  The device with the
+	highest letter will be the most recently plugged in device.<br />
+	A typical device name would be <code>/dev/sdb</code> which would show it's
+	partition in <code>/proc/partitions</code> as <code>/dev/sdb1</code>, as
+	the typical device is sold with a single <code>vfat</code> partition.
+</p>
+
+<p>
+	Depending on how <em>udev</em> is configured, that vfat partition may be
+	automatically mounted, if so, it will need to be <em>unmounted</em>
+	before proceeding.  Just to be safe, issue this command before the write,
+	modifying if the device was assigned a different letter (for example, it
+	could have been called /dev/sd<b>c</b>1 if the computer already had two
+	installed hard disks or other media.
+</p>
+
+<code class="rootcode">umount /dev/sdb1</code>
+<br />
+
+<p>
+	If the device was not mounted, that command will give a harmless error.
+	Now we are ready to create the media, here's the command you'll need:
+</p>
+
+<code class="rootcode">
+dd if=angelinux<strong>&lt;VERSION&gt;</strong>.img of=/dev/<strong>&lt;MYMEDIA&gt;</strong> conv=sync,noerror bs=512 count=1280<br>
+</code>
+<br />
+
+<h3>What that all meant...</h3>
+
+<ul>
+	<li><code>dd</code> - <em>Device to Device</em> copy command.
+						Take something (an image file on hard disk),
+						and copy it to something else (USB or SD Card).
+		 </li>
+	<li><code>if=</code> - <em>Input File</em>, in this case our image.</li>
+	<li><code>of=</code> - <em>Output File</em>, the USB Stick or SD Card</li>
+	<li><code>conv=</code> -<em>Conversion</em> options: I like to specify:</li>
+	<li><code>sync,noerror</code> - Retry on error, and don't use cache.</li>
+	<li><code>bs=</code> - <em>Block size</em> to write at a time.  This is the
+						option you can be least fussy about. 512 * 2 * anything
+						up to 4M will be fine, but if using different options,
+						don't forget to divide the count (if specified) by the
+						same amount.	
+		</li>
+	<li><code>count=</code> - How many blocks of <code>bs</code> to copy.</li>
+</ul>
+
+<h3>And just in case it's not obvious...</h3>
+<p>
+	In the above command, modify as follows:
+</p>
+
+<ul>
+	<li><b>&lt;VERSION&gt;</b> - The version number from the downloaded file.</li>
+	<li><b>&lt;MYMEDIA&gt;</b> - is the device you're writing the image to.</li>
+</ul>
+
+<h3>Step 3 - Check everything</h3>
+<p>
+	Once the <em>dd</em> command has completed, <strong>without further
+	ado</strong>, establish if that previous command successfully completed.
+</p>
+
+<code class="rootcode">
+echo $?
+</code>
+
+<p>
+	If that comes back with <code>0</code>, then the write was successful.
+	Any other value <code>1</code> or above means there was some problem.
+</p>
+
+<h3>Step 4 - Check that the final image is error free</h3>
+<br />
+
+<code class="usercode">
+md5sum -c angelinux0.38.md5
+</code>
+
+<p>
+	The output will look like this, and <code>OK</code> displayed
+	if the written image is intact.
+</p>
+
+<p class="output">
+282fbd4b6b4453fbec1c60d22fc13840  angelinux0.38.img 
+</p>
+<br />
+
+<br />
+<h3>Step 5 - Boot from the image</h3>
+<p>
+	Apart from contrary BIOSes, your computer should now boot from the image.
+	<b>Enjoy!</b>
+</p>

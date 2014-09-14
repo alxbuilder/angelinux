@@ -1,0 +1,69 @@
+<h2>I don't believe it, I'm bored!</h2>
+
+<p>
+	In the course of debugging a problem with <a href="http://texstudio.sourceforge.net/">
+	TexStudio</a>, (I'm supposedly missing a package), I tried to locate it in an
+	ever-sprawling directory subtree.
+</p>
+
+<h3>The Upside</h3>
+<p>
+	Locating a file is easy: <code class="usercode">locate whatever.ext</code>
+	will do it, and lightning fast, <em>provided that</em> it looks up an up to date
+	database.
+</p>
+<p>
+	The file <code>/var/cache/locate/locatedb</code> file is used by default on Debian.
+	This can vary depending on distribution.
+</p>
+
+<h3>The downside</h3>
+<p>
+	The database doesn't come cheap.  Ideally each filesystem should have it's own
+	database, especially if there are <em>Network Drives</em> loaded.  It should be
+	kept in mind too, that there is no point in including certain directories like
+	ones where <em>CDs</em> are mounted, or directories containing temporary files.	
+</p>
+
+<h3>An example</h3>
+On this system the <code class="usercode">mount</code> command shows
+<pre>
+<code class="output">
+Filesystem     1M-blocks  Used Available Use% Mounted on
+/dev/sda6          30625 14555     14492  51% /
+udev                  10     0        10   0% /dev
+tmpfs                336     1       335   1% /run
+tmpfs                  5     0         5   0% /run/lock
+tmpfs               1843     1      1842   1% /run/shm
+/dev/sda1            232    33       184  15% /boot
+/dev/sda3           3781  1769      1801  50% /var
+/dev/sda5          68180 28136     36558  44% /home
+</code>
+</pre>
+
+A quick <code class="usercode">ls /</code> gives us
+<pre>
+<code class="output">
+0     dev   initrd.img  lost+found  opt   run   sys  var
+bin   etc   lib         media       proc  sbin  tmp  vmlinuz
+boot  home  lib64       mnt         root  srv   usr
+</code>
+</pre>
+
+<h3>The command</h3>
+
+<pre>
+<code class="rootcode">
+updatedb --prunefs "/dev /boot /var /home" --prunepaths "/tmp /run /proc /srv /dev /lib64"
+</code>
+</pre>
+
+<p>
+	Once done, I can look for the <em>supposed</em> missing file, 
+	or get closer to solving with: <code class="usercode">locate mathtext.sty</code>,
+	which came back with <code class="output">
+	/usr/share/texlive/texmf-dist/tex/latex/akktex/akkmathtext.sty</code>.
+</p>
+<p>
+	The error message wasn't messing, it's not the same file, time to delve deeper.
+</p>

@@ -1,0 +1,35 @@
+<pre><code class="shellscript">
+#!/bin/bash
+#(@) Create repository on github from a command line
+
+# export GITUSER="alxbuilder"
+# export GITPROJ="alxblog"
+
+for PARAM in `echo "GITUSER" "GITPROJ"`
+do
+
+  echo setting $PARAM
+  export VALUE=""
+  while [ -z $VALUE ]
+  do
+    echo -n "Name: "
+    read VALUE
+    [ -z $VALUE ] && echo "$PARAM Must have a value"
+  done
+  export `echo $PARAM`=$VALUE
+
+done
+echo GITUSER: $GITUSER
+echo GITPROJ: $GITPROJ
+echo -n "Press RETURN to continue, <ctrl-c> to bail out"
+
+[ -d ./${GITPROJ} ] || mkdir ${GITPROJ}
+[ -d ./${GITPROJ} ] && [ x$? = "x0" ] && cd $GITPROJ
+
+touch README.md
+git init
+git add README.md
+git commit -m manually created from CLI
+git remote add origin git@github.com:${GITUSER}/${GITPROG}.git
+git push -u origin master
+</code></pre>

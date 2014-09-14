@@ -1,0 +1,7 @@
+title:	find me
+parent:	/
+tags:
+scripts:
+- http://www.openlayers.org/api/OpenLayers.js
+- /js/osm-map.js
+onload:	init();

@@ -1,0 +1,19 @@
+<p>
+this is the links page
+
+<ul>
+	<li>	:filename				<%= @item[:filename] %></li>
+	<li>	:content_filename	<%= @item[:content_filename] %></li>
+	<li>	gsubbed_link <%= @item[:content_filename].to_s.gsub('content','http://angelinux.hopto.org') %>
+	<li>	:meta_filename	<%= @item[:meta_filename] %></li>
+	<li>	:extension	<%= @item[:extension] %></li>
+</ul>
+
+
+<% rep = @item.rep_named(:default) %>
+<%= rep %>
+
+<%= @item[:params] %>
+
+
+</p>

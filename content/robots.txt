@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /google7b9493cf6dbbe3f7*
+Disallow: /images
+Disallow: /documents
+Disallow: /about/contact_page
+Disallow: /contact-reserve
+Disallow: /about/takeform
+Disallow: /about/contactform
+Disallow: /about/protest
+Disallow: /about/findme
