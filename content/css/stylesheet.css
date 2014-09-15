@@ -226,3 +226,8 @@ p ol li {
 	background-color: black;
 	text-indent: 5%;
 }
+
+#mapdiv {
+		width:320px;
+		height:240px;
+}
