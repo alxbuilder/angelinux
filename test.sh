@@ -7,5 +7,6 @@ do
   nanoc compile && \
   ls -ld output/robots* && \
   ls -ld output/sitemap* ; \
+  rsync -vrtplz ./.well-known/ ./output/.well-known/
   nanoc view && sleep 3
 done

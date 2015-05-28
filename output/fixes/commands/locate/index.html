@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>locate & updatedb</title>
+	<meta charset="utf-8"/>
+	<meta name="author" content="debian" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<meta name="description" content="angelinux, linux, networking,
+		debugging, troubleshooting, data recovery, disaster-recovery,
+		software development, Java, Ruby on Rails, Sinatra, Padrino,
+		Remote Support, Reverse VNC, 
+		Raspberry Pi, GNU-Screen, ssh, forensics, ethical hacking, privacy, 
+		encryption, TOR, Debian Ubuntu, Slackware, Gentoo, Red-Hat, LFS, 
+		Linux from Scratch, SuSE, Mandriva, Linux tools, multimedia,
+		transcoding" />	
+
+	<meta name="city" content="Longford" />
+	<meta name="country" content="Ireland" />
+	<meta name="Robots" content="index,noimageindex,noarchive,nofollow" />
+	<meta name="google-site-verification"
+		content="cnq4arhtoJRs8a5Mq5YMp4FtkdxuXW67hLLCjPMGKio" />
+
+	<!-- For Persona, and because M$ are incapable of developing a decent broswer -->
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<link rel="stylesheet" href="/css/stylesheet.css" />
+
+
+
+
+
+
+</head>
+
+
+	
+
+	<body onload="">
+
+<div id="body">
+	<div id="main">
+		<header>
+			<h1>locate & updatedb</h1>
+			<hr />
+		</header>
+		<br />
+		<h2>I don't believe it, I'm bored!</h2>
+
+<p>
+	In the course of debugging a problem with <a href="http://texstudio.sourceforge.net/">
+	TexStudio</a>, (I'm supposedly missing a package), I tried to locate it in an
+	ever-sprawling directory subtree.
+</p>
+
+<h3>The Upside</h3>
+<p>
+	Locating a file is easy: <code class="usercode">locate whatever.ext</code>
+	will do it, and lightning fast, <em>provided that</em> it looks up an up to date
+	database.
+</p>
+<p>
+	The file <code>/var/cache/locate/locatedb</code> file is used by default on Debian.
+	This can vary depending on distribution.
+</p>
+
+<h3>The downside</h3>
+<p>
+	The database doesn't come cheap.  Ideally each filesystem should have it's own
+	database, especially if there are <em>Network Drives</em> loaded.  It should be
+	kept in mind too, that there is no point in including certain directories like
+	ones where <em>CDs</em> are mounted, or directories containing temporary files.	
+</p>
+
+<h3>An example</h3>
+On this system the <code class="usercode">mount</code> command shows
+<pre>
+<code class="output">
+Filesystem     1M-blocks  Used Available Use% Mounted on
+/dev/sda6          30625 14555     14492  51% /
+udev                  10     0        10   0% /dev
+tmpfs                336     1       335   1% /run
+tmpfs                  5     0         5   0% /run/lock
+tmpfs               1843     1      1842   1% /run/shm
+/dev/sda1            232    33       184  15% /boot
+/dev/sda3           3781  1769      1801  50% /var
+/dev/sda5          68180 28136     36558  44% /home
+</code>
+</pre>
+
+A quick <code class="usercode">ls /</code> gives us
+<pre>
+<code class="output">
+0     dev   initrd.img  lost+found  opt   run   sys  var
+bin   etc   lib         media       proc  sbin  tmp  vmlinuz
+boot  home  lib64       mnt         root  srv   usr
+</code>
+</pre>
+
+<h3>The command</h3>
+
+<pre>
+<code class="rootcode">
+updatedb --prunefs "/dev /boot /var /home" --prunepaths "/tmp /run /proc /srv /dev /lib64"
+</code>
+</pre>
+
+<p>
+	Once done, I can look for the <em>supposed</em> missing file, 
+	or get closer to solving with: <code class="usercode">locate mathtext.sty</code>,
+	which came back with <code class="output">
+	/usr/share/texlive/texmf-dist/tex/latex/akktex/akkmathtext.sty</code>.
+</p>
+<p>
+	The error message wasn't messing, it's not the same file, time to delve deeper.
+</p>
+		
+		<footer>
+			<p>Site design &copy; Angelinux 2014</p>
+		</footer>
+	</div>
+
+	<div id="sidebar">
+		<a href="/" >
+			<img id="logo" src="/images/logo.png" alt="angelinux logo" 
+			width="100px" height="100px" />
+		</a>
+		<h2>linux</h2>
+			<ul>
+				<li><a title="How to get rid of Windows XP" 
+					href="/linux">repla<wbr />ce xp</a></li>
+				<li><a title="Once is enough to hunt down a solution" 
+					href="/fixes">solve stuff</a></li>
+			</ul>
+
+		<h2>Angel<wbr />inux</h2>
+		<ul>
+			<li><a title="angelinux - My distribution built from source code"
+				href="/angelinux">angel<wbr />inux</a></li>
+		</ul>
+
+		<h2>Prog<wbr />rams</h2>
+		<ul>
+<!--			<li><a title="Make your life easier" href="/links">links</a></li>
+			<li><a title="Essentials" href="/links/linux">Linux</a></li>
+-->		<li><a title="Essential Programs for ALL Computer Users"
+				href="/links/programs">Essen<wbr />tials</a></li>
+			<li><a title="Quick Start for Ruby development"
+				href="/links/ruby">Ruby</a></li>
+		</ul>
+
+		<h2>about</h2>
+		<ul>
+			<li><a title="Recent and On-line courses and qualifications"
+				href="/about/education">Educa<wbr />tion</a> </li>
+<!--	<li><a title="Where to find me" href="/about/findme">Find  <wbr />me</a></li>
+-->	<li><a title="How this site was put together" 
+				href="/about/thissite" >This <wbr />site</a></li>
+			<li><a title="Send me eMail"
+				href="/about/contact" >Conta<wbr />ct</a></li>
+		</ul>
+
+		<h2>Share</h2>
+	
+	<div id="share-buttons">
+	
+
+		<!-- LinkedIn -->
+		<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://angelinux.hopto.org/fixes/commands/locate.html"
+			width="32" height="32" target="_blank">
+			<img src="/images/share_buttons/linkedin.png" alt="LinkedIn" />
+		</a>
+
+		<!-- Facebook -->
+		<a href="http://www.facebook.com/sharer.php?u=http://angelinux.hopto.org/fixes/commands/locate.html" 
+			target="_blank">
+			<img src="/images/share_buttons/facebook.png"
+			width="32" height="32" alt="Facebook" />
+		</a>
+
+		<!-- Twitter -->
+		<a href="http://twitter.com/share?url=http://angelinux.hopto.org/fixes/commands/locate.html&text=http://angelinux.hopto.org/fixes/commands/locate.html"
+			target="_blank">
+			<img src="/images/share_buttons/twitter.png"
+			width="32" height="32" alt="Twitter" />
+		</a>
+
+		<!-- Google+ -->
+		<a href="https://plus.google.com/share?url=http://angelinux.hopto.org/fixes/commands/locate.html"
+			target="_blank">
+			<img src="/images/share_buttons/googleplus.png"
+			width="32" height="32" alt="Google Plus" />
+		</a>
+
+		<!-- Digg
+		<a href="http://www.digg.com/submit?url=http://angelinux.hopto.org/fixes/commands/locate.html"
+			width="32" height="32" target="_blank">
+			<img src="http://www.simplesharebuttons.com/images/somacro/diggit.png"
+			alt="Digg" />
+		</a>
+
+		 Reddit
+		<a href="http://reddit.com/submit?url=http://angelinux.hopto.org/fixes/commands/locate.html&title=http://angelinux.hopto.org/fixes/commands/locate.html" 
+			width="32" height="32" target="_blank">
+			<img src="http://www.simplesharebuttons.com/images/somacro/reddit.png"
+			alt="Reddit" />		
+		</a> -->
+	</div>	
+</div>
+</div>
+<!--	Rewinding off Persona until implementation details established
+	<script src="https://login.persona.org/include.js"></script>
+-->
+<!--
+	Insert a site map using tips at http://stuartellis.eu/articles/nanoc-notes/"
+-->
+</body>
+</html>

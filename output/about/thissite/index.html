@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Running a website from home</title>
+	<meta charset="utf-8"/>
+	<meta name="author" content="debian" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<meta name="description" content="angelinux, linux, networking,
+		debugging, troubleshooting, data recovery, disaster-recovery,
+		software development, Java, Ruby on Rails, Sinatra, Padrino,
+		Remote Support, Reverse VNC, 
+		Raspberry Pi, GNU-Screen, ssh, forensics, ethical hacking, privacy, 
+		encryption, TOR, Debian Ubuntu, Slackware, Gentoo, Red-Hat, LFS, 
+		Linux from Scratch, SuSE, Mandriva, Linux tools, multimedia,
+		transcoding" />	
+
+	<meta name="city" content="Longford" />
+	<meta name="country" content="Ireland" />
+	<meta name="Robots" content="index,noimageindex,noarchive,nofollow" />
+	<meta name="google-site-verification"
+		content="cnq4arhtoJRs8a5Mq5YMp4FtkdxuXW67hLLCjPMGKio" />
+
+	<!-- For Persona, and because M$ are incapable of developing a decent broswer -->
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<link rel="stylesheet" href="/css/stylesheet.css" />
+
+
+
+
+
+
+</head>
+
+
+	
+
+	<body onload="">
+
+<div id="body">
+	<div id="main">
+		<header>
+			<h1>Running a website from home</h1>
+			<hr />
+		</header>
+		<br />
+		<h2>How this site was put together</h2>
+
+<p>
+	This is my own website running on my own hardware from my own home.
+	There is no reason why most people could not do exactly the same thing.
+	Here is what you need, and what you need to do.
+</p>
+
+<h3>Hardware (a web server)</h3>
+
+<p>
+	There are many home servers and media boxes sold to serve content so if
+	you already have something like this, you may be able to skip this step.
+	Assuming you haven't, you could visit the <a href="http://excito.com/">
+	B3 Store</a> like I did years ago.
+</p>
+
+<p>
+	Alternatively, there is no reason why you could not run a server on a
+	<a href="http://raspberrypi.org/">Raspberry Pi</a>.  There you will find
+	all you need to get started including downloads and tutorials.  It can 
+	help, to buy something <a href="http://modmypi.com/">preconfigured</a>
+	to be sure you have everything you need.
+</p>
+
+<h3>A name for the site</h3>
+
+<p>
+	Names (like special car number plates) come at a price, often very little.
+	For a cost, I could have got <i>http://angelinux<b>.org</b>/</i>.  My 
+	<a href="http://no-ip.com">name provider</a> offers various names like
+	<i>http://choose-a-name<b>.hopto.org</b></i>.  This can be seen by
+	<a href="http://freedns.afraid.org/domain/dnstrace.php?domain=angelinux.hopto.org&submit=Trace">
+	tracing</a> to this site.
+</p>
+
+<p>
+	It seems this activity is catching on, and there will soon be
+	a <a href="http://en.wikipedia.org/wiki/.free">dotFree</a> domain.  And
+	there are <a href="http://dnsdynamic.org/why.php">other things </a> you
+	might want to do with your new powers!	
+</p>
+
+<h3>Some providers I've come across</h3>
+
+<ul>
+	<li><a href="http://duckdns.org/">DuckDns</a></li>
+	<li><a href="http://dnsdynamic.org/">DNSdynamic</a></li>
+	<li><a href="http://cloudflare.com/">CloudFlare</a></li>
+	<li><a href="http://dynu.com/">DYnu</a></li>
+	<li><a href="http://freenom.com/">Freenom</a></li>
+</ul>
+
+<h3>Dynamic DNS Service</h3>
+
+<p>
+	At it's simplest, DNS (Dynamic Name Service) is the reason why you can
+	visit a website without knowing it's IP address, like the way you can
+	dial from your contacts without remembering your friend's number.
+</p>
+
+<p>
+	Unfortunately, unlike that analogy, your friends phone number doesn't
+	constantly change, like your <a href="http://whatismyipaddress.com">
+	IP address</a> does.  Unless you specifically ask and pay, providers
+	<em>lease</em> and reassign those addresses not being used.
+</p>
+
+<p>
+	So, what you need is a way to associate an unchanging site name with 
+	a constantly changing address.  That is what dynamic DNS services offer.
+</p>
+
+<h3>Monitoring</h3>
+
+<p>	I use 
+	<a href="http://stats.pingdom.com/5woicuhs23qw/328711"> Pingdom</a>
+	to keep an eye on this site from the outside.  I can recognise
+	particular times from the history, such as when I moved house and
+	was awaiting reconnection, and my horrendous downtimes after getting
+	<a href="http://eircom.net">eFibre</a>.
+</p>
+		
+		<footer>
+			<p>Site design &copy; Angelinux 2014</p>
+		</footer>
+	</div>
+
+	<div id="sidebar">
+		<a href="/" >
+			<img id="logo" src="/images/logo.png" alt="angelinux logo" 
+			width="100px" height="100px" />
+		</a>
+		<h2>linux</h2>
+			<ul>
+				<li><a title="How to get rid of Windows XP" 
+					href="/linux">repla<wbr />ce xp</a></li>
+				<li><a title="Once is enough to hunt down a solution" 
+					href="/fixes">solve stuff</a></li>
+				<li><a title="Saw it, liked it" 
+					href="/links/other">Geeky<wbr /> stuff</a></li>
+			</ul>
+
+		<h2>Angel<wbr />inux</h2>
+		<ul>
+			<li><a title="angelinux - My distribution built from source code"
+				href="/angelinux">angel<wbr />inux</a></li>
+		</ul>
+
+		<h2>Prog<wbr />rams</h2>
+		<ul>
+<!--			<li><a title="Make your life easier" href="/links">links</a></li>
+			<li><a title="Essentials" href="/links/linux">Linux</a></li>
+-->		<li><a title="Essential Programs for ALL Computer Users"
+				href="/links/programs">Essen<wbr />tials</a></li>
+			<li><a title="Quick Start for Ruby development"
+				href="/links/ruby">Ruby</a></li>
+		</ul>
+
+		<h2>Secu<wbr />rity</h2>
+		<ul>
+			<li><a title="Because it's dangerous out there"
+				href="/security/introduction">Stay<wbr /> safe</a></li>
+			<li><a title="Protect yourself from data harvesting"
+				href="/links/fightback">Fight back</a></li>
+		</ul>
+
+		<h2>about</h2>
+		<ul>
+			<li><a title="Recent and On-line courses and qualifications"
+				href="/about/education">Educa<wbr />tion</a> </li>
+<!--	<li><a title="Where to find me" href="/about/findme">Find  <wbr />me</a></li>
+-->	<li><a title="How this site was put together" 
+				href="/about/thissite" >This <wbr />site</a></li>
+			<li><a title="Send me eMail"
+				href="/about/contact" >Conta<wbr />ct</a></li>
+		</ul>
+
+		<h2>Share</h2>
+	
+	<div id="share-buttons">
+	
+
+		<!-- LinkedIn -->
+		<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://angelinux.hopto.org/about/thissite.html"
+			width="32" height="32" target="_blank">
+			<img src="/images/share_buttons/linkedin.png" alt="LinkedIn" />
+		</a>
+
+		<!-- Facebook -->
+		<a href="http://www.facebook.com/sharer.php?u=http://angelinux.hopto.org/about/thissite.html" 
+			target="_blank">
+			<img src="/images/share_buttons/facebook.png"
+			width="32" height="32" alt="Facebook" />
+		</a>
+
+		<!-- Twitter -->
+		<a href="http://twitter.com/share?url=http://angelinux.hopto.org/about/thissite.html&text=http://angelinux.hopto.org/about/thissite.html"
+			target="_blank">
+			<img src="/images/share_buttons/twitter.png"
+			width="32" height="32" alt="Twitter" />
+		</a>
+
+		<!-- Google+ -->
+		<a href="https://plus.google.com/share?url=http://angelinux.hopto.org/about/thissite.html"
+			target="_blank">
+			<img src="/images/share_buttons/googleplus.png"
+			width="32" height="32" alt="Google Plus" />
+		</a>
+
+		<!-- Digg
+		<a href="http://www.digg.com/submit?url=http://angelinux.hopto.org/about/thissite.html"
+			width="32" height="32" target="_blank">
+			<img src="http://www.simplesharebuttons.com/images/somacro/diggit.png"
+			alt="Digg" />
+		</a>
+
+		 Reddit
+		<a href="http://reddit.com/submit?url=http://angelinux.hopto.org/about/thissite.html&title=http://angelinux.hopto.org/about/thissite.html" 
+			width="32" height="32" target="_blank">
+			<img src="http://www.simplesharebuttons.com/images/somacro/reddit.png"
+			alt="Reddit" />		
+		</a> -->
+	</div>	
+</div>
+</div>
+<!--	Rewinding off Persona until implementation details established
+	<script src="https://login.persona.org/include.js"></script>
+-->
+<!--
+	Insert a site map using tips at http://stuartellis.eu/articles/nanoc-notes/"
+-->
+<!-- Doctor links so that external links appear as target="_empty" -->
+<script type="text/javascript" src="/js/here_there.js">
+
+</script>
+</body>
+</html>

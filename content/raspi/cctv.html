@@ -1,0 +1,39 @@
+<h2>Raspberry Pi CCTV</h2>
+
+<p>
+	This installation is being done using the latest
+	<a href="http://kali.org"> Kali Linux</a> but any Debian will do.
+</p>
+
+<h3>Hardware</h3>
+<ul>
+	<li>Official camara module</li>
+	<li>Working wireless connection</li>
+</ul>
+<br /><hr />
+
+<h3>Get the camara recognised</h3>
+
+<p>
+	Let's start by setting up a basic <a href="/raspi/cctv"> CCTV</a>.
+<pre><code class="rootcode">
+apt-get install -y python-imaging-tk
+</code></pre>
+</p>
+
+<h3>This didn't work</h3>
+<p>
+	Now we get a python script from Pastebin
+<pre><code class="usercode">
+wget -c http://pastebin.com/raw.php?i=yH7JHz9w -O picam.py && chmod +x picam.py
+</code></pre>
+
+
+<pre><code class="usercode">
+wget -c https://github.com/silvanmelchior/RPi_Cam_Web_Interface/archive/master.zip
+unzip master.zip
+cd RPi_Cam_Web_Interface
+</code></pre>
+
+</p>
+

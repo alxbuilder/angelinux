@@ -1,9 +1,17 @@
+<h2>Github deployment bash shell script</h2>
+
+<p>
+	To upload a directory to github, it should exist
+	within the directory from which this script is called.
+	There is a chance to bail out if you make a typo.
+</p>
+
 <pre><code class="shellscript">
 #!/bin/bash
 #(@) Create repository on github from a command line
 
-# export GITUSER="alxbuilder"
-# export GITPROJ="alxblog"
+# export GITUSER="Github Username"
+# export GITPROJ="Github Repo"
 
 for PARAM in `echo "GITUSER" "GITPROJ"`
 do
@@ -21,7 +29,8 @@ do
 done
 echo GITUSER: $GITUSER
 echo GITPROJ: $GITPROJ
-echo -n "Press RETURN to continue, <ctrl-c> to bail out"
+echo -n 'Press RETURN to continue, Ctrl-c to bail out'
+read anykey
 
 [ -d ./${GITPROJ} ] || mkdir ${GITPROJ}
 [ -d ./${GITPROJ} ] && [ x$? = "x0" ] && cd $GITPROJ
@@ -29,7 +38,7 @@ echo -n "Press RETURN to continue, <ctrl-c> to bail out"
 touch README.md
 git init
 git add README.md
-git commit -m manually created from CLI
+git commit -m "manually created from CLI"
 git remote add origin git@github.com:${GITUSER}/${GITPROG}.git
 git push -u origin master
 </code></pre>

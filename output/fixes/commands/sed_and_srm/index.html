@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Disobedient delete</title>
+	<meta charset="utf-8"/>
+	<meta name="author" content="debian" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<meta name="description" content="angelinux, linux, networking,
+		debugging, troubleshooting, data recovery, disaster-recovery,
+		software development, Java, Ruby on Rails, Sinatra, Padrino,
+		Remote Support, Reverse VNC, 
+		Raspberry Pi, GNU-Screen, ssh, forensics, ethical hacking, privacy, 
+		encryption, TOR, Debian Ubuntu, Slackware, Gentoo, Red-Hat, LFS, 
+		Linux from Scratch, SuSE, Mandriva, Linux tools, multimedia,
+		transcoding" />	
+
+	<meta name="city" content="Longford" />
+	<meta name="country" content="Ireland" />
+	<meta name="Robots" content="index,noimageindex,noarchive,nofollow" />
+	<meta name="google-site-verification"
+		content="cnq4arhtoJRs8a5Mq5YMp4FtkdxuXW67hLLCjPMGKio" />
+
+	<!-- For Persona, and because M$ are incapable of developing a decent broswer -->
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<link rel="stylesheet" href="/css/stylesheet.css" />
+
+
+
+
+
+
+</head>
+
+
+	
+
+	<body onload="">
+
+<div id="body">
+	<div id="main">
+		<header>
+			<h1>Disobedient delete</h1>
+			<hr />
+		</header>
+		<br />
+		<h2>Woops, I thought those were deleted</h2>
+
+<h3>Rant</h3>
+<p>
+	One of Window's worst user interface features has <em>always</em>
+	been it's annoying habit of (not just) second-guessing, but knowing
+	better than the user.
+</p>
+<p>
+	For now, I'll lay off a little, because it turns out that files I
+	deleted had been instead <em>moved</em> to a <i>hidden</i> place
+	for me.
+</p>
+
+<h3>Action</h3>
+<p>
+	I will be very disappointed if I find out that this is something that
+	<a href="http://freedesktop.org">FreeDesktop.org</a> have endorsed,
+	because I can't imagine a lightweight desktop like 
+	<a href="http://lxde.org" >LXDE</a> would have come up with it.
+	The main problem with simpler solutions than this one is that they 
+	won't work because of the spaces within directory or file names.
+</p>
+
+<h3>The manual fix</h3>
+<p>
+	In case I ever need to do this again, I just need to use a different 
+	directory name but the <code>sed</code> code will remain the same.
+</p>
+<p>
+	Essentially what it does is put a single quote before and after the
+	filenames, telling the shell that the whole thing should be considered,
+	and that the space does not represent the start of the next filename.
+</p>
+
+<pre><code class="usercode">
+cd ~/.local/share/Trash && \
+find . -type f -print |sed -e s/^./\'./g -e s/\\\(.$\\\)/\\1\'/g
+</code></pre>
+
+<h3>Explanation</h3>
+<p>
+	What we need here is to use <code>sed</code>'s placeholder feature.
+	Here's a sample line containing a file to delete, (spot the spaces):
+	<br /><code>
+	./info/angelinux and other stuff_files.trashinfo
+	</code><br />
+	For this to be considered one file, we need to delete (note the quotes)
+	<br /> <code><em>'</em>./info/angelinux and other 
+	stuff_files.trashinfo<em>'</em></code> <br />
+</p>
+
+<p>
+	In sed and many other contexts, <code>^</code> is the beginning of a
+	line and <code>$</code> is the end, and <code>.</code> matches exactly
+	one character.
+</p>
+<p>
+	As luck would have it, this makes the first <em>edit string</em> very
+	simple, because the first character in the example is itself a <em>.</em>
+</p>
+
+<p>
+	The end of line is slightly trickier because we can't afford to lose the
+	last character and replace it with a dot like before.  What we do is trap
+	it inside brackets, and in the replace string, drop the first thing we
+	trapped.
+</p>
+
+<p>
+	The difficulty is that <code>\</code>, <code>(</code>, and <code>)</code>
+	are all special characters and require to be escaped with <code>\</code>
+	to achieve the context that we want. 
+</p>
+
+<p>
+	An alternative to all this is the <code>srm</code> command which shreds
+	and removes these files.  To do this, <code>cd</code> into the required
+	directory and <code class="usercode">srm -rvd *</code> to recursively
+	and securely delete the files.
+</p>
+		
+		<footer>
+			<p>Site design &copy; Angelinux 2014</p>
+		</footer>
+	</div>
+
+	<div id="sidebar">
+		<a href="/" >
+			<img id="logo" src="/images/logo.png" alt="angelinux logo" 
+			width="100px" height="100px" />
+		</a>
+		<h2>linux</h2>
+			<ul>
+				<li><a title="How to get rid of Windows XP" 
+					href="/linux">repla<wbr />ce xp</a></li>
+				<li><a title="Once is enough to hunt down a solution" 
+					href="/fixes">solve stuff</a></li>
+			</ul>
+
+		<h2>Angel<wbr />inux</h2>
+		<ul>
+			<li><a title="angelinux - My distribution built from source code"
+				href="/angelinux">angel<wbr />inux</a></li>
+		</ul>
+
+		<h2>Prog<wbr />rams</h2>
+		<ul>
+<!--			<li><a title="Make your life easier" href="/links">links</a></li>
+			<li><a title="Essentials" href="/links/linux">Linux</a></li>
+-->		<li><a title="Essential Programs for ALL Computer Users"
+				href="/links/programs">Essen<wbr />tials</a></li>
+			<li><a title="Quick Start for Ruby development"
+				href="/links/ruby">Ruby</a></li>
+		</ul>
+
+		<h2>about</h2>
+		<ul>
+			<li><a title="Recent and On-line courses and qualifications"
+				href="/about/education">Educa<wbr />tion</a> </li>
+<!--	<li><a title="Where to find me" href="/about/findme">Find  <wbr />me</a></li>
+-->	<li><a title="How this site was put together" 
+				href="/about/thissite" >This <wbr />site</a></li>
+			<li><a title="Send me eMail"
+				href="/about/contact" >Conta<wbr />ct</a></li>
+		</ul>
+
+		<h2>Share</h2>
+	
+	<div id="share-buttons">
+	
+
+		<!-- LinkedIn -->
+		<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html"
+			width="32" height="32" target="_blank">
+			<img src="/images/share_buttons/linkedin.png" alt="LinkedIn" />
+		</a>
+
+		<!-- Facebook -->
+		<a href="http://www.facebook.com/sharer.php?u=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html" 
+			target="_blank">
+			<img src="/images/share_buttons/facebook.png"
+			width="32" height="32" alt="Facebook" />
+		</a>
+
+		<!-- Twitter -->
+		<a href="http://twitter.com/share?url=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html&text=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html"
+			target="_blank">
+			<img src="/images/share_buttons/twitter.png"
+			width="32" height="32" alt="Twitter" />
+		</a>
+
+		<!-- Google+ -->
+		<a href="https://plus.google.com/share?url=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html"
+			target="_blank">
+			<img src="/images/share_buttons/googleplus.png"
+			width="32" height="32" alt="Google Plus" />
+		</a>
+
+		<!-- Digg
+		<a href="http://www.digg.com/submit?url=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html"
+			width="32" height="32" target="_blank">
+			<img src="http://www.simplesharebuttons.com/images/somacro/diggit.png"
+			alt="Digg" />
+		</a>
+
+		 Reddit
+		<a href="http://reddit.com/submit?url=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html&title=http://angelinux.hopto.org/fixes/commands/sed_and_srm.html" 
+			width="32" height="32" target="_blank">
+			<img src="http://www.simplesharebuttons.com/images/somacro/reddit.png"
+			alt="Reddit" />		
+		</a> -->
+	</div>	
+</div>
+</div>
+<!--	Rewinding off Persona until implementation details established
+	<script src="https://login.persona.org/include.js"></script>
+-->
+<!--
+	Insert a site map using tips at http://stuartellis.eu/articles/nanoc-notes/"
+-->
+</body>
+</html>

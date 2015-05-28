@@ -17,91 +17,14 @@ BASE_URL = 'http://angelinux.herokuapp.com'
 #
 # Requires a Heroku Application (a heroku remote) that runs on Celadon Cedar
 #
-desc 'Deploy the website to Heroku using Git.'
+# desc 'Deploy the website to Heroku using Git.'
 task :deploy do
   prepare!
   compile!
   # May need to uncomment
   # Rake::Task["optimize:all"].invoke
-  deploy!
-  revert!
-end
-
-##
-# A couple of rake tasks that'll optimize JPG, PNG, JavaScripts and Stylesheet files
-#
-namespace :optimize do
-
-  ##
-  # Gem Requirement:
-  #  YUI-Compressor - Bundled in Gemfile
-  #
-  desc 'Compress all stylesheet files'
-  task :stylesheets do
-    require 'yui/compressor'
-    compressor = YUI::CssCompressor.new
-
-    Dir['output/**/*.css'].each do |stylesheet|
-      puts "Compressing Stylesheet: #{stylesheet}"
-      css = File.read(stylesheet)
-      File.open(stylesheet, 'w') do |file|
-        file.write(compressor.compress(css))
-      end
-    end
-  end
-
-  ##
-  # Gem Requirement:
-  #  YUI-Compressor - Bundled in Gemfile
-  #
-  desc 'Compress all javascript files'
-  task :javascripts do
-    require 'yui/compressor'
-    compressor = YUI::JavaScriptCompressor.new(:munge => true)
-
-    Dir['output/**/*.js'].each do |javascript|
-      puts "Compressing JavaScript: #{javascript}"
-      js = File.read(javascript)
-      File.open(javascript, 'w') do |file|
-        file.write(compressor.compress(js))
-      end
-    end
-  end
-
-  ##
-  # Package Requirement:
-  #  jpegoptim
-  # Install OSX:
-  #  brew install jpegoptim
-  # Install Ubuntu:
-  #  [apt-get | aptitude] install jpegoptim
-  #
-  desc 'Optimize JPG images in output/images directory using jpegoptim'
-  task :jpg do
-    # May need to uncomment this
-    # puts `find output/images -name '*.jpg' -exec jpegoptim {} \\;`
-  end
-
-  ##
-  # Package Requirement:
-  #  optipng
-  # Install OSX:
-  #  brew install optipng
-  # Install Ubuntu:
-  #  [apt-get | aptitude] install optipng
-  #
-  desc 'Optimize PNG images in output/images directory using optipng'
-  task :png do
-    # May need to uncomment this
-    # puts `find output/images -name '*.png' -exec optipng {} \\;`
-  end
-
-  ##
-  # Convenient task for performing all optimization techniques at once
-  #
-  # May need to uncomment this/these
-  # desc 'Optimize all JPG, PNG, Stylesheet and JavaScript files in the output directory'
-  # task :all => [:jpg, :png, :javascripts, :stylesheets]
+  # deploy!
+  # revert!
 end
 
 ##

@@ -19,6 +19,14 @@ preprocess do
   create_sitemap
 end
 
+compile 'sitemap' do
+  filter :erb
+end
+
+route 'sitemap' do
+  item.identifier.chop + '.xml'
+end
+
 compile %r{^/robots.txt} do
 end
 
@@ -51,6 +59,10 @@ end
 
 route '/css/*' do
   "/css/" + File.basename(item.identifier.chop) + ".css"
+end
+
+compile '/js/*' do
+#	nil
 end
 
 # JS Experimental -see ../futuresimple.txt

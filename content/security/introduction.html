@@ -1,0 +1,90 @@
+<h2>Things you should know...</h2>
+
+<p>
+	Edward Snowden's accounts of 
+	<a href="http://www.wired.com/2014/07/nsa-targets-users-of-privacy-services/">
+	mass surveillance</a> have led many, myself included, to reassess security.
+	To be called <em>extremists</em> (as that article does), for having these
+	concerns, is a clear sign that things are happening that shouldn't.
+</p>
+<p>	
+	To be honest, nothing that came out particularly surprised me.  To be protected to
+	an acceptable level, you really need to be using the
+	<a href="http://torproject.org"> Tor Browser Bundle</a>, which raises a big
+	red flag all by itself!
+</p>
+<p>
+	To make sure this section is as accurate as possible, I took on board 
+	<a href="https://www.torproject.org/projects/torbrowser/design/#fingerprinting-linkability">
+	The Tor Perspective
+	</a>, and based on that and other research, I hope this is accessible to most users.
+</p>
+<p>
+	For anyone who just wants a faster user experience, without worrying about
+	<a href="https://support.google.com/analytics/answer/181881?hl=en-GB">
+	the technical details</a> should start by	
+	<a href="https://tools.google.com/dlpage/gaoptout/eula.html">
+	Blocking Google Analytics</a>, used on a huge slew of sites.
+</p>
+
+<p>
+	<ul>
+		<li><h3>Browser Fingerprints</h3>
+			Your browser has a <a href="/security/fingerprint" >fingerprint</a>.
+			and if you're not using a <a name="stock browser"
+			title="browser on a mass-produced phone or tablet">stock browser</a>,
+			then you can assume it's as unique as your finger's print, and even
+			if it's not, your device ID <em>is</em>.
+			<br />
+			All the unique attributes of your device, language, timezone,
+			software versions and plugins all combine to make browsers unique.
+		</li>
+		<br /><hr />
+
+		<li><h3>Don't <em>addthis</em>... don't do lots of things!</h3>
+			Variations in setups that allow 
+			<a href="http://www.geek.com/apps/canvas-fingerprinting-is-like-a-cookie-you-cant-block-and-thousands-of-sites-are-using-it-1599967/">
+			browser fingerprinting</a>	have the knock-on effect that each browser
+			<a href="http://www.propublica.org/article/meet-the-online-tracking-device-that-is-virtually-impossible-to-block#">
+			draws in a unique way</a> on what's called the HTML5 <em>canvas</em> tag.
+			Try the demonstration on the link, it's polite enough to ask your permission.
+			<br />
+			The above link not only shows a demonstration of the technique in
+			action, but also publishes a
+			<a href="https://securehomes.esat.kuleuven.be/~gacar/persistent/canvas_urls.html">
+			wall of shame</a>	of offending sites, the top three of which seem to be
+			<a name="addthis" title="http://addthis.com"><em>addthis</em></a>,
+			<a name="ligatus" title="http://ligatus.com"><em>ligatus</em></a> and
+			<a name="plentyoffish" title="http://pof.com"><em>plentyoffish</em></a>.
+		</li>
+		<p>
+			All indications are that Addthis are
+			<a href="http://mashable.com/2014/07/21/impossible-block-tracking-tool/">
+			unapologetic</a>, and the code upon which they built is still
+			<a href="http://valve.github.io/blog/2013/07/14/anonymous-browser-fingerprinting/">
+			in the wild</a>.
+			This is partularly nasty and underhand, and it has already been
+			suggested
+			that this technique be used to replace
+			traditional cookies.
+		</p>
+		<br /><hr />
+
+		<li><h3>Persistent cookies</h3>
+			Digital marketing companies don't like you deleting your cookies,
+			and regularly use 
+			<a href="http://www.economist.com/blogs/economist-explains/2014/08/economist-explains-3">
+			persistant cookies</a> to allow trackers to <em>recreate the cookies you 
+			deleted</em>.
+			These persistant cookies are also known as
+			<a href="http://samy.pl/evercookie" ><em>ever</em>cookie</a>s.		
+		</li>
+		<br /><hr />
+		
+<!--		<li>The <a name="nsa" title="National Security Agency">NSA</a> in the USA
+			consider anyone having privacy concerns to be 
+			<a href="http://www.wired.com/2014/07/nsa-targets-users-of-privacy-services/">
+			extremist</a>, and flag that user for attention.
+		</li>
+-->	</ul>
+</p>

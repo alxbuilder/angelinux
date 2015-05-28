@@ -1,0 +1,4 @@
+title:	Disobedient delete
+parent:	/fixes/commands
+tags:	linux commands secure delete
+commands: sed srm 

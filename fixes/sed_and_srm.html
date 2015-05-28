@@ -1,0 +1,81 @@
+<h2>Woops, I thought those were deleted</h2>
+
+<h3>Rant</h3>
+<p>
+	One of Window's worst user interface features has <em>always</em>
+	been it's annoying habit of (not just) second-guessing, but knowing
+	better than the user.
+</p>
+<p>
+	For now, I'll lay off a little, because it turns out that files I
+	deleted had been instead <em>moved</em> to a <i>hidden</i> place
+	for me.
+</p>
+
+<h3>Action</h3>
+<p>
+	I will be very disappointed if I find out that this is something that
+	<a href="http://freedesktop.org">FreeDesktop.org</a> have endorsed,
+	because I can't imagine a lightweight desktop like 
+	<a href="http://lxde.org" >LXDE</a> would have come up with it.
+	The main problem with simpler solutions than this one is that they 
+	won't work because of the spaces within directory or file names.
+</p>
+
+<h3>The manual fix</h3>
+<p>
+	In case I ever need to do this again, I just need to use a different 
+	directory name but the <code>sed</code> code will remain the same.
+</p>
+<p>
+	Essentially what it does is put a single quote before and after the
+	filenames, telling the shell that the whole thing should be considered,
+	and that the space does not represent the start of the next filename.
+</p>
+
+<pre><code class="usercode">
+cd ~/.local/share/Trash && \
+find . -type f -print |sed -e s/^./\'./g -e s/\\\(.$\\\)/\\1\'/g
+</code></pre>
+
+<h3>Explanation</h3>
+<p>
+	What we need here is to use <code>sed</code>'s placeholder feature.
+	Here's a sample line containing a file to delete, (spot the spaces):
+	<br /><code>
+	./info/angelinux and other stuff_files.trashinfo
+	</code><br />
+	For this to be considered one file, we need to delete (note the quotes)
+	<br /> <code><em>'</em>./info/angelinux and other 
+	stuff_files.trashinfo<em>'</em></code> <br />
+</p>
+
+<p>
+	In sed and many other contexts, <code>^</code> is the beginning of a
+	line and <code>$</code> is the end, and <code>.</code> matches exactly
+	one character.
+</p>
+<p>
+	As luck would have it, this makes the first <em>edit string</em> very
+	simple, because the first character in the example is itself a <em>.</em>
+</p>
+
+<p>
+	The end of line is slightly trickier because we can't afford to lose the
+	last character and replace it with a dot like before.  What we do is trap
+	it inside brackets, and in the replace string, drop the first thing we
+	trapped.
+</p>
+
+<p>
+	The difficulty is that <code>\</code>, <code>(</code>, and <code>)</code>
+	are all special characters and require to be escaped with <code>\</code>
+	to achieve the context that we want. 
+</p>
+
+<p>
+	An alternative to all this is the <code>srm</code> command which shreds
+	and removes these files.  To do this, <code>cd</code> into the required
+	directory and <code class="usercode">srm -rvd *</code> to recursively
+	and securely delete the files.
+</p>
